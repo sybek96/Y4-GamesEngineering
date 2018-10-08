@@ -16,6 +16,9 @@ public:
 
 	void idle();
 	void jumping();
-	void climbing();
+	void firing();
+	void shielding();
+	void meleeing();
+	void crouching();
 };
 

@@ -171,6 +171,18 @@ bool Game::loadMedia()
 		printf("Failed to load texture image x.png!\n");
 		success = false;
 	}
+	m_playerIdle = loadTexture("idle.png");
+	if (m_playerIdle == NULL)
+	{
+		printf("Failed to load texture image idle.png!\n");
+		success = false;
+	}
+	m_playerJump = loadTexture("jump.png");
+	if (m_playerIdle == NULL)
+	{
+		printf("Failed to load texture image jump.png!\n");
+		success = false;
+	}
 
 	return success;
 }
@@ -211,8 +223,8 @@ void Game::draw()
 	{
 		SDL_RenderCopy(gRenderer, gTexture2, NULL, rect);
 		rect->x += rect->w;
-	}
-
+	}	
+	SDL_RenderCopy(gRenderer, m_playerIdle, NULL, rect);
 	//Update screen
 	SDL_RenderPresent(gRenderer);
 }

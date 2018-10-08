@@ -10,6 +10,14 @@ Animation::Animation()
 
 Animation::~Animation()
 {
+	if (nullptr != m_current)
+	{
+		delete m_current;
+	}
+	if (nullptr != m_previous)
+	{
+		delete m_previous;
+	}
 }
 
 void Animation::setCurrent(State * s)
@@ -42,6 +50,22 @@ void Animation::jumping()
 	m_current->jumping(this);
 }
 
-void Animation::climbing()
+void Animation::firing()
 {
+	m_current->firing(this);
+}
+
+void Animation::shielding()
+{
+	m_current->shielding(this);
+}
+
+void Animation::meleeing()
+{
+	m_current->meleeing(this);
+}
+
+void Animation::crouching()
+{
+	m_current->crouching(this);
 }

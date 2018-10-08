@@ -1,17 +1,17 @@
 #pragma once
 #include "State.h"
-class Jumping :
+class Shielding :
 	public State
 {
 public:
-	Jumping();
-	~Jumping();
+	Shielding();
+	~Shielding();
 	void handleInput() override;
 	void update() override;
-	void idle(Animation * a);
+	void jumping(Animation* a) override;
 	void crouching(Animation* a) override;
-	void shielding(Animation* a) override;
 	void meleeing(Animation* a) override;
 	void firing(Animation* a) override;
+	void idle(Animation* a) override;
 };
 

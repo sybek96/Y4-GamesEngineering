@@ -136,27 +136,35 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="Crouching.cpp" />
+    <ClCompile Include="Firing.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Idle.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Jumping.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Meleeing.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Shielding.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CrouchCommand.h" />
+    <ClInclude Include="Crouching.h" />
     <ClInclude Include="FireCommand.h" />
+    <ClInclude Include="Firing.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Idle.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="JumpCommand.h" />
     <ClInclude Include="Jumping.h" />
     <ClInclude Include="MeleeCommand.h" />
+    <ClInclude Include="Meleeing.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ShieldCommand.h" />
+    <ClInclude Include="Shielding.h" />
     <ClInclude Include="State.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

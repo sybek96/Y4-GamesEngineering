@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL.h>
 /// <summary>
 /// This is a character abstract class,
 /// it defines a character in the game

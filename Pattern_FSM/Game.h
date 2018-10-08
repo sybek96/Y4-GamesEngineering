@@ -46,6 +46,10 @@ private:
 
 	SDL_Texture* gTexture2 = NULL;
 
+	SDL_Texture* m_playerIdle = NULL;
+
+	SDL_Texture* m_playerJump = NULL;
+
 	std::vector<SDL_Texture*> m_wallTextures;
 
 	std::unique_ptr<InputHandler> m_inputHandler;

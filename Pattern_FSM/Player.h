@@ -16,6 +16,7 @@ private:
 public:
 	Player();
 	~Player();
+
 	void jump() override;
 	void fire() override;
 	void crouch() override;

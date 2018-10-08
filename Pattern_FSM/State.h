@@ -39,4 +39,8 @@ public:
 	{
 		std::cout << "State::Meleeing" << std::endl;
 	}
+	virtual void idle(Animation* a)
+	{
+		std::cout << "State::Idling" << std::endl;
+	}
 };

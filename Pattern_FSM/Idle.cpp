@@ -1,5 +1,9 @@
 #include "Idle.h"
 #include "Jumping.h"
+#include "Firing.h"
+#include "Crouching.h"
+#include "Shielding.h"
+#include "Meleeing.h"
 
 Idle::Idle()
 {
@@ -27,20 +31,28 @@ void Idle::jumping(Animation* a)
 
 void Idle::crouching(Animation* a)
 {
-	std::cout << "Idle -> Crouch" << std::endl;
+	std::cout << "Idle -> Crouching" << std::endl;
+	a->setCurrent(new Crouching());
+	delete this;
 }
 
 void Idle::shielding(Animation* a)
 {
-	std::cout << "Idle -> Shield" << std::endl;
+	std::cout << "Idle -> Shielding" << std::endl;
+	a->setCurrent(new Shielding());
+	delete this;
 }
 
 void Idle::meleeing(Animation* a)
 {
-	std::cout << "Idle -> Melee" << std::endl;
+	std::cout << "Idle -> Meleeing" << std::endl;
+	a->setCurrent(new Meleeing());
+	delete this;
 }
 
 void Idle::firing(Animation* a)
 {
-	std::cout << "Idle -> Fire" << std::endl;
+	std::cout << "Idle -> Firing" << std::endl;
+	a->setCurrent(new Firing());
+	delete this;
 }

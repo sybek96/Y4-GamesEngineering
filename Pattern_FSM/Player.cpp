@@ -23,21 +23,25 @@ void Player::jump()
 void Player::fire()
 {
 	std::cout << "Player has fired!" << std::endl;
+	m_animation.firing();
 }
 
 void Player::crouch()
 {
 	std::cout << "Player has crouched!" << std::endl;
+	m_animation.crouching();
 }
 
 void Player::shield()
 {
 	std::cout << "Player has shielded!" << std::endl;
+	m_animation.shielding();
 }
 
 void Player::melee()
 {
 	std::cout << "Player has used melee!" << std::endl;
+	m_animation.meleeing();
 }
 
 void Player::update()
@@ -46,4 +50,5 @@ void Player::update()
 
 void Player::draw()
 {
+
 }

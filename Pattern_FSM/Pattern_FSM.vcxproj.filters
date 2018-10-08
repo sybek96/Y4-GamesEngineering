@@ -36,6 +36,18 @@
     <ClCompile Include="Jumping.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Crouching.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shielding.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Meleeing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Firing.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -78,6 +90,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Jumping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Crouching.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shielding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Meleeing.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Firing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
