@@ -2,6 +2,7 @@
 #include "Character.h"
 #include <iostream>
 #include <SDL.h>
+#include "Animation.h"
 
 /// <summary>
 /// The player class, inherits the character class.
@@ -9,6 +10,9 @@
 /// </summary>
 class Player : public Character
 {
+private:
+	Animation m_animation;
+
 public:
 	Player();
 	~Player();
