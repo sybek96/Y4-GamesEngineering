@@ -9,7 +9,6 @@
 Game::Game()
 {
 	m_inputHandler = std::unique_ptr<InputHandler>(new InputHandler());
-	m_player = std::unique_ptr<Player>(new Player());
 	m_inputHandler->bindSpace(new JumpCommand());
 	m_inputHandler->bindC(new CrouchCommand());
 	m_inputHandler->bindX(new ShieldCommand());
@@ -33,6 +32,7 @@ Game::Game()
 		}
 		else
 		{
+			m_player = std::unique_ptr<Player>(new Player(*gRenderer));
 			//Main loop flag
 			bool quit = false;
 
@@ -81,7 +81,7 @@ Game::Game()
 						break;
 					}
 				}
-
+				update();
 				draw();
 			}
 		}
@@ -104,6 +104,7 @@ bool Game::init()
 {
 	//Initialization flag
 	bool success = true;
+
 
 	//Initialize SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -149,6 +150,7 @@ bool Game::init()
 			}
 		}
 	}
+
 
 	return success;
 }
@@ -205,6 +207,11 @@ void Game::close()
 	SDL_Quit();
 }
 
+void Game::update()
+{
+	m_player->update();
+}
+
 void Game::draw()
 {
 	//Clear screen
@@ -225,6 +232,7 @@ void Game::draw()
 		rect->x += rect->w;
 	}	
 	SDL_RenderCopy(gRenderer, m_playerIdle, NULL, rect);
+	m_player->draw();
 	//Update screen
 	SDL_RenderPresent(gRenderer);
 }

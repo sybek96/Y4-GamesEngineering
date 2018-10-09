@@ -3,11 +3,15 @@
 #include "Jumping.h"
 
 
-Player::Player()
+Player::Player(SDL_Renderer& renderer)
+	: m_renderer(renderer)
+	, m_animatedSprite(renderer)
 {
 	m_animation.setCurrent(new Idle());
 	m_animation.setPrevious(new Idle());
 }
+
+
 
 
 Player::~Player()
@@ -46,9 +50,19 @@ void Player::melee()
 
 void Player::update()
 {
+	m_animatedSprite.update();
 }
 
 void Player::draw()
 {
+	m_animatedSprite.draw();
 
 }
+
+AnimatedSprite & Player::getAnimatedSprite()
+{
+	int frame = m_animatedSprite.getCurrentFrame();
+	
+	return m_animatedSprite;
+}
+

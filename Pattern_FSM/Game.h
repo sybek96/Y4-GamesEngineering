@@ -23,6 +23,8 @@ public:
 	//Frees media and shuts down SDL
 	void close();
 	//draw method
+	void update();
+
 	void draw();
 
 private:
@@ -57,6 +59,7 @@ private:
 	std::unique_ptr<Player> m_player;
 
 	Command* m_playerCommand;
+
 
 };
 

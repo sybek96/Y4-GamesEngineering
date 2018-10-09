@@ -3,6 +3,7 @@
 #include <iostream>
 #include <SDL.h>
 #include "Animation.h"
+#include "AnimatedSprite.h"
 
 /// <summary>
 /// The player class, inherits the character class.
@@ -12,9 +13,11 @@ class Player : public Character
 {
 private:
 	Animation m_animation;
+	AnimatedSprite m_animatedSprite;
+	SDL_Renderer& m_renderer;
 
 public:
-	Player();
+	Player(SDL_Renderer& renderer);
 	~Player();
 
 	void jump() override;
@@ -24,5 +27,8 @@ public:
 	void melee() override;
 	void update() override;
 	void draw() override;
+	void addAnimRects(int width, int height, int framesWidth, int framesHeight);
+	AnimatedSprite& getAnimatedSprite();
+
 };
 
