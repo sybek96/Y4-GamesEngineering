@@ -18,7 +18,7 @@ public:
 	void update();
 	void draw();
 	void addAnimRects(int width, int height, int framesWidth, int framesHeight);
-
+	void setCurrentTexture(SDL_Texture& texture);
 
 
 private:
@@ -32,7 +32,6 @@ private:
 	Uint32 m_timePlayingFrame;
 
 	SDL_Renderer& m_renderer;
-	SDL_Texture* m_playerIdle;
-	SDL_Texture* m_playerJump;
+	SDL_Texture* m_currentTexture;
 };
 

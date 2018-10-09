@@ -11,11 +11,6 @@ AnimatedSprite::AnimatedSprite(SDL_Renderer& renderer)
 	, m_deltaTime(0)
 	, m_renderer(renderer)
 {
-	m_playerIdle = loadTexture("player_idle.png");
-	addAnimRects(199, 288, 5, 4);
-	//m_playerJump = loadTexture("player_jump_loop.png");
-	//addAnimRects(234, 344, 5, 4);
-
 }
 
 void AnimatedSprite::addAnimRects(int width, int height, int framesWidth, int framesHeight)
@@ -34,6 +29,11 @@ void AnimatedSprite::addAnimRects(int width, int height, int framesWidth, int fr
 			addFrame(textRect);
 		}
 	}
+}
+
+void AnimatedSprite::setCurrentTexture(SDL_Texture & texture)
+{
+	m_currentTexture = &texture;
 }
 
 
@@ -91,33 +91,8 @@ void AnimatedSprite::update()
 
 void AnimatedSprite::draw()
 {
-	SDL_RenderCopy(&m_renderer, m_playerIdle, &getFrame(getCurrentFrame()), NULL);
+	SDL_RenderCopy(&m_renderer, m_currentTexture, &getFrame(getCurrentFrame()), NULL);
 }
 
 
-SDL_Texture * AnimatedSprite::loadTexture(std::string path)
-{
-	//The final texture
-	SDL_Texture* newTexture = NULL;
 
-	//Load image at specified path
-	SDL_Surface* loadedSurface = IMG_Load(path.c_str());
-	if (loadedSurface == NULL)
-	{
-		printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
-	}
-	else
-	{
-		//Create texture from surface pixels
-		newTexture = SDL_CreateTextureFromSurface(&m_renderer, loadedSurface);
-		if (newTexture == NULL)
-		{
-			printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
-		}
-
-		//Get rid of old loaded surface
-		SDL_FreeSurface(loadedSurface);
-	}
-
-	return newTexture;
-}

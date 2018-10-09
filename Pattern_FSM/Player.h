@@ -15,6 +15,8 @@ private:
 	Animation m_animation;
 	AnimatedSprite m_animatedSprite;
 	SDL_Renderer& m_renderer;
+	SDL_Texture* m_playerIdle;
+	SDL_Texture* m_playerJump;
 
 public:
 	Player(SDL_Renderer& renderer);
@@ -27,7 +29,8 @@ public:
 	void melee() override;
 	void update() override;
 	void draw() override;
-	void addAnimRects(int width, int height, int framesWidth, int framesHeight);
+	//void addAnimRects(int width, int height, int framesWidth, int framesHeight);
+	SDL_Texture * loadTexture(std::string path);
 	AnimatedSprite& getAnimatedSprite();
 
 };
