@@ -5,8 +5,8 @@
 
 class Test
 {
-	Test();
 public:
+	Test() {};
 	void isRepeated(std::vector<int> numbers);
 	void isInRange(std::vector<int> numbers);
 	void onlyNumbers(std::vector<int> numbers);
