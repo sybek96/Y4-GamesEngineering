@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{2AC6C799-BB00-45BB-B53A-AED2530BB42F}</ProjectGuid>
-    <RootNamespace>TestProject</RootNamespace>
+    <ProjectGuid>{10F84612-64FD-4D42-814F-8713AF28D24A}</ProjectGuid>
+    <RootNamespace>ProductionProject</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -115,13 +115,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\ProductionProject\Production.cpp" />
-    <ClCompile Include="TestFramework.cpp" />
+    <ClCompile Include="Production.cpp" />
+    <ClCompile Include="productionMainline.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ProductionProject\ProductionProject.vcxproj">
-      <Project>{10f84612-64fd-4d42-814f-8713af28d24a}</Project>
-    </ProjectReference>
+    <ClInclude Include="Production.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,21 +1,21 @@
 #include <iostream>
 #include <assert.h>
 #include <vector>
+#include "../ProductionProject/Production.h"
 
-//#include "../ProductionProject/Production.h"
 
 using namespace std;
 class Production;
 
 int main()
 {
-	//Production p;
+	Production p;
 	std::vector<int> inputNums;
 
 
 	//Take in input
 	//currently commented since production not existing
-	//inputNums = p.getInput();
+	inputNums = p.takeInput();
 
 	int counter = 0;
 	for (auto& number : inputNums)
