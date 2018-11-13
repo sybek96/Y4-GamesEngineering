@@ -13,15 +13,15 @@ Game::Game()
 	m_player = std::make_unique<Entity>(Entity());
 	HealthComponent hc =  HealthComponent();
 	PositionComponent pc =  PositionComponent();
-	controlComponent cc =  controlComponent();
+	//controlComponent cc =  controlComponent();
 	m_player->addComponent(hc);
 	m_player->addComponent(pc);
-	m_player->addComponent(cc);
+	//m_player->addComponent(cc);
 	m_player->setName("Player");
 
 	//assign player to his systems
 	m_renderSystem.addEntity(*m_player);
-	m_controlSystem.addEntity(*m_player);
+	//m_controlSystem.addEntity(*m_player);
 
 
 	//////////////////////////////
@@ -30,13 +30,16 @@ Game::Game()
 	m_dog = std::make_unique<Entity>(Entity());
 	HealthComponent hc1 = HealthComponent();
 	PositionComponent pc1 = PositionComponent();
+	controlComponent cc1 = controlComponent();
 	m_dog->addComponent(hc1);
 	m_dog->addComponent(pc1);
+	m_dog->addComponent(cc1);
 	m_dog->setName("Dog");
 
 	//assign dog to his systems
 	m_renderSystem.addEntity(*m_dog);
-	m_aiSystem.addEntity(*m_dog);
+	//m_aiSystem.addEntity(*m_dog);
+	m_controlSystem.addEntity(*m_dog);
 
 
 	//////////////////////////////
