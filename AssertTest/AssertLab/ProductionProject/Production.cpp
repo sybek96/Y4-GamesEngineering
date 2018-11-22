@@ -5,92 +5,80 @@
 /// Verify has 6 elements
 /// </summary>
 /// <param name="numbers"></param>
-void Production::has6Elements(std::vector<int> numbers)
+bool Production::has6Elements(std::vector<int> numbers)
 {
-	int counter = 0;
-	for (auto& number : numbers)
-	{
-		counter++;
-	}
-	if (counter != 6)
-	{
-		std::cout << "Number of parameters is not 6!" << std::endl;
-		std::cout << "-- Amount of numbers " << counter << std::endl;
-	}
-}
-
-/// <summary>
-/// Verify all elements are integers
-/// </summary>
-/// <param name="numbers"></param>
-void Production::onlyNumbers(std::vector<int> numbers)
-{
-	for (auto& number : numbers)
-	{
-		if (number != floor(number))
+		bool result = true;
+		int counter = 0;
+		for (auto& number : numbers)
 		{
-			std::cout << "Input element is not a number, please use only numbers" << std::endl;
-			std::cout << "-- Input element causing error is " << number << std::endl;
+			counter++;
 		}
-	}
+		if (counter != 6)
+		{
+			result = false;
+
+		}
+		return result;
 }
 
 /// <summary>
 /// checks if number is between 1 and 46
 /// </summary>
 /// <param name="numbers"></param>
-void Production::isInRange(std::vector<int> numbers)
+bool Production::isInRange(std::vector<int> numbers)
 {
-	for (auto& number : numbers)
-	{
-		if (number < 0 || number > 47)
+		bool result = true;
+		for (auto& number : numbers)
 		{
-			std::cout << "Number not within valid range, please use numbers from 1 to 47" << std::endl;
-			std::cout << "-- number out of range is " << number << std::endl;
+			if (number < 0 || number > 47)
+			{
+				result = false;
+			}
 		}
-	}
+		return result;
 }
 
 /// <summary>
 /// Check if the number is repeated
 /// </summary>
 /// <param name="numbers"></param>
-void Production::isRepeated(std::vector<int> numbers)
+bool Production::hasUniqueNums(std::vector<int> numbers)
 {
-	for (int i = 0; i < numbers.size(); i++)
-	{
-		for (int j = i + 1; j < numbers.size(); j++)
+		bool result = true;
+		for (int i = 0; i < numbers.size(); i++)
 		{
-			if (numbers[i] == numbers[j])
+			for (int j = i + 1; j < numbers.size(); j++)
 			{
-				std::cout << "You have repeated the same number! Numbers may not repeat." << std::endl;
-				std::cout << "-- number repeated " << numbers[j] << std::endl;
+				if (numbers[i] == numbers[j])
+				{
+					result = false;
+				}
 			}
 		}
-	}
+		return result;
 }
 
-std::vector<int> Production::takeInput()
+std::pair<bool, std::vector<int>> Production::takeInput()
 {
-
-	std::vector<int> numbers;
-	int counter = 0;
-	while (counter != 6)
-	{
-		int num;
-		if (!(std::cin >> num))
+		std::vector<int> numbers;
+		bool result = true;
+		int counter = 0;
+		while (counter != 6)
 		{
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout << "Invalid input, please use only numbers" << std::endl;
-			break;
+			int num;
+			if (!(std::cin >> num))
+			{
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				result = false;
+				break;
+			}
+			else
+			{
+				numbers.push_back(num);
+			}
+			counter++;
 		}
-		else
-		{
-			numbers.push_back(num);
-		}
-		counter++;
-	}
+		return std::make_pair(result,numbers);
 
-	return numbers;
 }

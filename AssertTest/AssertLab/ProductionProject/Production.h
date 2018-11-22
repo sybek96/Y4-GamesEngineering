@@ -1,14 +1,14 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include<limits>
+#include <limits>
+#include <string>
 
 class Production
 {
 public:
-	std::vector<int> takeInput();
-	void has6Elements(std::vector<int> numbers);
-	void onlyNumbers(std::vector<int> numbers);
-	void isInRange(std::vector<int> numbers);
-	void isRepeated(std::vector<int> numbers);
+	std::pair<bool,std::vector<int>> takeInput();
+	bool has6Elements(std::vector<int> numbers);
+	bool isInRange(std::vector<int> numbers);
+	bool hasUniqueNums(std::vector<int> numbers);
 };

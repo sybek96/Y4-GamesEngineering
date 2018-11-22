@@ -10,36 +10,45 @@ class Production;
 int main()
 {
 	Production p;
-	std::vector<int> inputNums;
 
-
-	//Take in input
-	//currently commented since production not existing
-	inputNums = p.takeInput();
-
+	std::vector<int> validInput = { 2,5,4,1,6,8 };
+	std::vector<int> invalidInput = {2,5,6,7,8,'a'};
+	//std::pair<bool, std::vector<int>> inputPair;
+	//inputPair.first = false;
+	//inputPair.second = invalidInput;
+	int totalTests = 6;
 	int counter = 0;
-	for (auto& number : inputNums)
-	{
-		counter++;
-		//assert we only have numbers
-		assert(number == floor(number));
 
-		//assert numbers are bettween 1 and 46
-		assert(number > 0 && number < 47);
 
-	}
+	//////////////////////////////////////////////////
+	////   VALID INPUT TESTS
+	//////////////////////////////////////////////////
+	
+	//assert numbers are bettween 1 and 46
+	assert(p.isInRange(validInput));
+	counter++;
 	//assert we have 6 elements
-	assert(counter == 6);
-
-
+	assert(p.has6Elements(validInput));
+	counter++;
 	//assert no repeats
-	for (int i = 0; i < inputNums.size(); i++)
-	{
-		for (int j = i + 1; j < inputNums.size(); j++)
-		{
-			assert(inputNums[i] != inputNums[j]);
-		}
-	}
+	assert(p.hasUniqueNums(validInput));
+	counter++;
+	//////////////////////////////////////////////////
+	//// INVALID INPUT TESTS
+	//////////////////////////////////////////////////
+
+	//assert numbers are bettween 1 and 46
+	assert(!p.isInRange(invalidInput));
+	counter++;
+	//assert we have 6 elements
+	assert(!p.has6Elements(invalidInput));
+	counter++;
+	//assert no repeats
+	assert(!p.hasUniqueNums(invalidInput));
+	counter++;
+	std::cout << counter << "/" << totalTests << " tests passed" << std::endl;
+	system("PAUSE");
+
 
 
 }
