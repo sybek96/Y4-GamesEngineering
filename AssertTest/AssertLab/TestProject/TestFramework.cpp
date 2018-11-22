@@ -12,40 +12,44 @@ int main()
 	Production p;
 
 	std::vector<int> validInput = { 2,5,4,1,6,8 };
-	std::vector<int> invalidInput = {2,5,6,7,8,'a'};
-	//std::pair<bool, std::vector<int>> inputPair;
-	//inputPair.first = false;
-	//inputPair.second = invalidInput;
-	int totalTests = 6;
+	std::vector<int> invalidInput = {2,5,6,7,8,'a',2};
+	std::vector<int> invalidEmptyInput = {};
+	std::vector<int> invalidSingleInput = { 1 };
+	int totalTests = 10;
 	int counter = 0;
 
-
 	//////////////////////////////////////////////////
-	////   VALID INPUT TESTS
+	////   has6Elems tests
 	//////////////////////////////////////////////////
-	
-	//assert numbers are bettween 1 and 46
-	assert(p.isInRange(validInput));
-	counter++;
-	//assert we have 6 elements
 	assert(p.has6Elements(validInput));
 	counter++;
-	//assert no repeats
-	assert(p.hasUniqueNums(validInput));
-	counter++;
-	//////////////////////////////////////////////////
-	//// INVALID INPUT TESTS
-	//////////////////////////////////////////////////
-
-	//assert numbers are bettween 1 and 46
-	assert(!p.isInRange(invalidInput));
-	counter++;
-	//assert we have 6 elements
 	assert(!p.has6Elements(invalidInput));
 	counter++;
-	//assert no repeats
+	assert(!p.has6Elements(invalidEmptyInput));
+	counter++;
+	//////////////////////////////////////////////////
+	////   hasUniqueNums tests
+	//////////////////////////////////////////////////
+	assert(p.hasUniqueNums(validInput));
+	counter++;
 	assert(!p.hasUniqueNums(invalidInput));
 	counter++;
+	assert(p.hasUniqueNums(invalidEmptyInput));
+	counter++;
+	assert(p.hasUniqueNums(invalidSingleInput));
+	counter++;
+	//////////////////////////////////////////////////
+	//// insInRange tests
+	//////////////////////////////////////////////////
+	assert(p.isInRange(validInput));
+	counter++;
+	assert(!p.isInRange(invalidInput));
+	counter++;
+	assert(!p.isInRange(invalidEmptyInput));
+	counter++;
+
+
+
 	std::cout << counter << "/" << totalTests << " tests passed" << std::endl;
 	system("PAUSE");
 
