@@ -7,18 +7,18 @@
 /// <param name="numbers"></param>
 bool Production::has6Elements(std::vector<int> numbers)
 {
-		bool result = true;
-		int counter = 0;
-		for (auto& number : numbers)
-		{
-			counter++;
-		}
-		if (counter != 6)
-		{
-			result = false;
+	bool result = true;
+	int counter = 0;
+	for (auto& number : numbers)
+	{
+		counter++;
+	}
+	if (counter != 6)
+	{
+		result = false;
 
-		}
-		return result;
+	}
+	return result;
 }
 
 /// <summary>
@@ -27,15 +27,19 @@ bool Production::has6Elements(std::vector<int> numbers)
 /// <param name="numbers"></param>
 bool Production::isInRange(std::vector<int> numbers)
 {
-		bool result = true;
-		for (auto& number : numbers)
+	bool result = true;
+	if (numbers.size() == 0)
+	{
+		result = false;
+	}
+	for (auto& number : numbers)
+	{
+		if (number < 0 || number > 47)
 		{
-			if (number < 0 || number > 47)
-			{
-				result = false;
-			}
+			result = false;
 		}
-		return result;
+	}
+	return result;
 }
 
 /// <summary>
@@ -44,41 +48,41 @@ bool Production::isInRange(std::vector<int> numbers)
 /// <param name="numbers"></param>
 bool Production::hasUniqueNums(std::vector<int> numbers)
 {
-		bool result = true;
-		for (int i = 0; i < numbers.size(); i++)
+	bool result = true;
+	for (int i = 0; i < numbers.size(); i++)
+	{
+		for (int j = i + 1; j < numbers.size(); j++)
 		{
-			for (int j = i + 1; j < numbers.size(); j++)
+			if (numbers[i] == numbers[j])
 			{
-				if (numbers[i] == numbers[j])
-				{
-					result = false;
-				}
+				result = false;
 			}
 		}
-		return result;
+	}
+	return result;
 }
 
 std::pair<bool, std::vector<int>> Production::takeInput()
 {
-		std::vector<int> numbers;
-		bool result = true;
-		int counter = 0;
-		while (counter != 6)
+	std::vector<int> numbers;
+	bool result = true;
+	int counter = 0;
+	while (counter != 6)
+	{
+		int num;
+		if (!(std::cin >> num))
 		{
-			int num;
-			if (!(std::cin >> num))
-			{
-				std::cin.clear();
-				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				result = false;
-				break;
-			}
-			else
-			{
-				numbers.push_back(num);
-			}
-			counter++;
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			result = false;
+			break;
 		}
-		return std::make_pair(result,numbers);
+		else
+		{
+			numbers.push_back(num);
+		}
+		counter++;
+	}
+	return std::make_pair(result, numbers);
 
 }
