@@ -7,6 +7,7 @@
 class Primitive {
 public:
 	Primitive();
+	~Primitive() = default;
 	virtual void draw(SDL_Renderer* renderer) = 0;
 	
 #pragma region Getters/Setters

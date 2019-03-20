@@ -5,6 +5,7 @@
 class Point : public Primitive {
 public:
 	Point(int x, int y);
+	~Point() = default;
 	void draw(SDL_Renderer* renderer) override;
 private:
 };

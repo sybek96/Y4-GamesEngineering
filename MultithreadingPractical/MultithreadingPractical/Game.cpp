@@ -39,6 +39,7 @@ Game::Game(int fps)
 			auto now = std::chrono::system_clock::now();
 			auto before = std::chrono::system_clock::now();
 
+			#pragma region GameLoop
 			while (!m_exit)
 			{
 				now = std::chrono::system_clock::now();
@@ -68,6 +69,8 @@ Game::Game(int fps)
 				//before time is now
 				before = now;
 			}
+
+			#pragma endregion
 		}
 	}
 
@@ -106,7 +109,6 @@ void Game::displayFPS(double& timer, int& frames)
 		frames = 0;
 	}
 }
-
 
 Game::~Game()
 {

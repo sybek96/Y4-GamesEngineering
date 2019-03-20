@@ -6,6 +6,7 @@
 class Square : public Primitive {
 public:
 	Square();
+	~Square() = default;
 	void draw(SDL_Renderer* renderer) override;
 
 #pragma region Getters/Setters

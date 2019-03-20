@@ -7,6 +7,7 @@
 class Circle : public Primitive{
 public:
 	Circle(int r);
+	~Circle() = default;
 	void draw(SDL_Renderer* renderer) override;
 private:
 	void drawCircle(SDL_Renderer* renderer);
