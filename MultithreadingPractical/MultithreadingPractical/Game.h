@@ -11,6 +11,11 @@
 #include <chrono>
 #include <iostream>
 #include "InputManager.h"
+#include "Primitive.h"
+#include "Square.h"
+#include "Point.h"
+#include "Line.h"
+#include "Circle.h"
 
 class Game
 {
@@ -64,6 +69,11 @@ private:
 	float m_msPerFrame;
 	InputManager inputHandler;
 	bool m_exit;
+	Square* square = nullptr;
+	Point* point = nullptr;
+	Line* line = nullptr;
+	Circle* circle = nullptr;
+	
 
 };
 

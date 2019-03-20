@@ -19,6 +19,17 @@ Game::Game(int fps)
 		}
 		else
 		{
+			point = new Point(10, 10);
+			point->setRGBA(255, 255, 0);
+			square = new Square();
+			square->setRGBA(73, 175, 107);
+			square->setPosition(100,100);
+			square->setSize(30, 30);
+			line = new Line(Vector2D(150, 150), Vector2D(300, 400));
+			line->setRGBA(32, 78, 130);
+			circle = new Circle(25);
+			circle->setRGBA(255, 0, 0);
+			circle->setPosition(250, 250);
 			SDL_Event e;
 			bool quit = 0;
 			double dt = 0;
@@ -90,6 +101,7 @@ void Game::displayFPS(double& timer, int& frames)
 	if (timer >= 1.0f)
 	{
 		timer -= 1;
+		system("CLS");
 		std::cout << "Frames per sec: " << frames << "\n";
 		frames = 0;
 	}
@@ -119,7 +131,8 @@ bool Game::init()
 			printf("Warning: Linear texture filtering not enabled!");
 		}
 		//Create window
-		gWindow = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		gWindow = SDL_CreateWindow("A* Ambush - Sebastian Kruzel", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		gScreenSurface = SDL_GetWindowSurface(gWindow);
 		if (gWindow == NULL)
 		{
 			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -193,6 +206,7 @@ void Game::update(double dt)
 	if (inputHandler.isPressed("Space"))
 	{
 		std::cout << "PRESSED SPACE" << std::endl;
+		circle->setPosition(circle->getPosition().x + 30, circle->getPosition().y);
 	}
 }
 
@@ -217,6 +231,10 @@ void Game::draw()
 		rect->x += rect->w;
 	}	
 	SDL_RenderCopy(gRenderer, m_playerIdle, NULL, rect);
+	point->draw(gRenderer);
+	square->draw(gRenderer);
+	line->draw(gRenderer);
+	circle->draw(gRenderer);
 	//Update screen
 	SDL_RenderPresent(gRenderer);
 }
