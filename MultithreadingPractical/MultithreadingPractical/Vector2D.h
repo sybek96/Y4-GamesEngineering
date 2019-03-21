@@ -23,6 +23,13 @@ struct Vector2D
 
   Vector2D():x(0.0),y(0.0){}
   Vector2D(double a, double b):x(a),y(b){}
+  ~Vector2D() = default;
+
+  Vector2D(Vector2D const &) = default;
+  Vector2D & operator=(Vector2D const &) = default;
+
+  Vector2D(Vector2D &&) = default;
+  Vector2D & operator=(Vector2D &&) = default;
 
   //sets x and y to zero
   void Zero(){x=0.0; y=0.0;}

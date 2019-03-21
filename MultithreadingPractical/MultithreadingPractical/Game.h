@@ -10,12 +10,14 @@
 #include <ctime>
 #include <chrono>
 #include <iostream>
+#include "Screen.h"
 #include "InputManager.h"
 #include "Primitive.h"
 #include "Square.h"
 #include "Point.h"
 #include "Line.h"
 #include "Circle.h"
+#include "Grid.h"
 
 class Game
 {
@@ -73,6 +75,8 @@ private:
 	Point* point = nullptr;
 	Line* line = nullptr;
 	Circle* circle = nullptr;
+
+	std::unique_ptr<Grid> grid;
 	
 
 };

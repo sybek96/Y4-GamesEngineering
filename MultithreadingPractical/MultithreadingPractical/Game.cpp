@@ -19,9 +19,11 @@ Game::Game(int fps)
 		}
 		else
 		{
+			grid.reset(new Grid(100, 100));
+			//used to draw the wall
 			point = new Point(10, 10);
 			point->setRGBA(255, 255, 0);
-			square = new Square();
+			square = new Square(true);
 			square->setRGBA(73, 175, 107);
 			square->setPosition(100,100);
 			square->setSize(30, 30);
@@ -133,7 +135,7 @@ bool Game::init()
 			printf("Warning: Linear texture filtering not enabled!");
 		}
 		//Create window
-		gWindow = SDL_CreateWindow("A* Ambush - Sebastian Kruzel", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		gWindow = SDL_CreateWindow("A* Ambush - Sebastian Kruzel", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Screen::getWidth(), Screen::getHeight(), SDL_WINDOW_SHOWN);
 		gScreenSurface = SDL_GetWindowSurface(gWindow);
 		if (gWindow == NULL)
 		{
@@ -220,23 +222,11 @@ void Game::draw()
 
 	//Render texture to screen
 	SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);
-	SDL_Rect* rect = new SDL_Rect();
-	rect->h = 100;
-	rect->w = 200;
-	rect->x = 300;
-	rect->y = 200;
-	SDL_RenderCopy(gRenderer, gTexture2, NULL, rect);
-
-	for (auto& wall : m_wallTextures)
-	{
-		SDL_RenderCopy(gRenderer, gTexture2, NULL, rect);
-		rect->x += rect->w;
-	}	
-	SDL_RenderCopy(gRenderer, m_playerIdle, NULL, rect);
 	point->draw(gRenderer);
 	square->draw(gRenderer);
 	line->draw(gRenderer);
 	circle->draw(gRenderer);
+	grid->draw(gRenderer);
 	//Update screen
 	SDL_RenderPresent(gRenderer);
 }

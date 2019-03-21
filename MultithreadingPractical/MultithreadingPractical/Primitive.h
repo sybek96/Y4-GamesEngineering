@@ -17,8 +17,8 @@ public:
 	int getA() { return a; }
 	void setRGBA(int _r, int _g, int _b, int _a = 255);
 	const Vector2D& getPosition() { return position; }
-	void setPosition(Vector2D _position);
-	void setPosition(float x, float y);
+	virtual void setPosition(Vector2D _position);
+	virtual  void setPosition(float x, float y);
 	const Vector2D& getOrigin() { return origin; }
 	void setOrigin(Vector2D _origin) { origin = _origin; }
 	void setOrigin(float x, float y) { origin = Vector2D(x, y); }

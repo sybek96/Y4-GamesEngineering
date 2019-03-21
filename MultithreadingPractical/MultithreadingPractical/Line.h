@@ -6,6 +6,14 @@ class Line : public Primitive {
 public:
 	Line(Vector2D _p1, Vector2D _p2);
 	~Line() = default;
+
+	Line(Line const &) = default;
+	Line & operator=(Line const &) = default;
+
+	Line(Line &&) noexcept = default;
+	Line & operator=(Line &&) = default;
+
+
 	void draw(SDL_Renderer* renderer) override;
 
 #pragma region Getters/Setters
