@@ -19,11 +19,11 @@ Game::Game(int fps)
 		}
 		else
 		{
-			grid.reset(new Grid(100, 100));
+			grid.reset(new Grid(5, 5));
 			//used to draw the wall
 			point = new Point(10, 10);
 			point->setRGBA(255, 255, 0);
-			square = new Square(true);
+			square = new Square(false);
 			square->setRGBA(73, 175, 107);
 			square->setPosition(100,100);
 			square->setSize(30, 30);

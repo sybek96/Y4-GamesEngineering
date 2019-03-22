@@ -11,7 +11,7 @@ Grid::Grid(int amountWide, int amountHigh)
 	{
 		for (int j = 0; j < amountWide * nodeSizeY; j+=nodeSizeY) //row
 		{
-			nodes.push_back(std::make_unique<Node>(Node(Vector2D(i, j), Vector2D(nodeSizeX, nodeSizeY))));
+			nodes.push_back(std::make_unique<Node>(Vector2D(i, j), Vector2D(nodeSizeX, nodeSizeY)));
 		}
 	}
 	//setting color of a line (wall)
