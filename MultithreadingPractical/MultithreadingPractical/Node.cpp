@@ -6,7 +6,7 @@ Node::Node(Vector2D position, Vector2D size)
 {
 	m_square->setPosition(m_position);
 	m_square->setSize(size);
-	m_square->setRGBA(255, 255, 255);
+	m_square->setRGBA(192, 196, 192);
 }
 
 void Node::draw(SDL_Renderer * renderer)
