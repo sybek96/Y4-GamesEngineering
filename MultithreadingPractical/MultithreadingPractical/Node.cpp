@@ -2,7 +2,7 @@
 
 Node::Node(Vector2D position, Vector2D size)
 	: m_position(position)
-	, m_square(std::make_unique<Square>(true))
+	, m_square(std::make_unique<Square>(false))
 {
 	m_square->setPosition(m_position);
 	m_square->setSize(size);

@@ -19,7 +19,7 @@ Game::Game(int fps)
 		}
 		else
 		{
-			grid.reset(new Grid(5, 5));
+			grid.reset(new Grid(10, 10));
 			//used to draw the wall
 			point = new Point(10, 10);
 			point->setRGBA(255, 255, 0);
@@ -32,6 +32,21 @@ Game::Game(int fps)
 			circle = new Circle(25);
 			circle->setRGBA(255, 0, 0);
 			circle->setPosition(250, 250);
+
+			//setting color of a line (wall)
+			for (int i = 11; i < 17; i++)
+			{
+				grid->getNodes().at(i)->setRGBA(99, 57, 5);
+				grid->getNodes().at(i)->setBlocked(true);
+			}
+
+			for (int i = 50; i < 56; i++)
+			{
+				grid->getNodes().at(i)->setRGBA(99, 57, 5);
+				grid->getNodes().at(i)->setBlocked(true);
+			}
+			enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(5)->getPosition()));
+			player.reset(new Player(grid->getNodes().at(70)->getPosition()));
 			SDL_Event e;
 			bool quit = 0;
 			double dt = 0;
@@ -227,6 +242,11 @@ void Game::draw()
 	line->draw(gRenderer);
 	circle->draw(gRenderer);
 	grid->draw(gRenderer);
+	player->draw(gRenderer);
+	for (auto & enemy : enemies)
+	{
+		enemy->draw(gRenderer);
+	}
 	//Update screen
 	SDL_RenderPresent(gRenderer);
 }

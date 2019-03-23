@@ -14,6 +14,17 @@ Grid::Grid(int amountWide, int amountHigh)
 			nodes.push_back(std::make_unique<Node>(Vector2D(i, j), Vector2D(nodeSizeX, nodeSizeY)));
 		}
 	}
+
+	for (int i = nodeSizeX; i < amountWide * nodeSizeX; i += nodeSizeX) //col
+	{
+		lines.push_back(std::make_unique<Line>(Vector2D(i, 0), Vector2D(i, Screen::getHeight())));
+	}
+
+	for (int i = nodeSizeY; i < amountHigh * nodeSizeY; i += nodeSizeY) //col
+	{
+		lines.push_back(std::make_unique<Line>(Vector2D(0, i), Vector2D(Screen::getWidth(), i)));
+	}
+
 	//setting color of a line (wall)
 	/*for (int i = 100; i < 170; i++)
 	{
@@ -26,5 +37,9 @@ void Grid::draw(SDL_Renderer * renderer)
 	for (auto& node : nodes)
 	{
 		node->draw(renderer);
+	}
+	for (auto& line : lines)
+	{
+		line->draw(renderer);
 	}
 }

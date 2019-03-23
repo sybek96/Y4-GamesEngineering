@@ -18,6 +18,8 @@
 #include "Line.h"
 #include "Circle.h"
 #include "Grid.h"
+#include "Enemy.h"
+#include "Player.h"
 
 class Game
 {
@@ -77,7 +79,8 @@ private:
 	Circle* circle = nullptr;
 
 	std::unique_ptr<Grid> grid;
-	
+	std::vector<std::shared_ptr<Enemy>> enemies;
+	std::unique_ptr<Player> player;
 
 };
 

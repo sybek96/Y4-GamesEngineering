@@ -126,12 +126,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Node.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="Screen.cpp" />
@@ -140,11 +142,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Circle.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="Screen.h" />
