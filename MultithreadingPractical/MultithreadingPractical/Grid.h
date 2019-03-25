@@ -24,10 +24,17 @@ public:
 #pragma endregion
 
 	void draw(SDL_Renderer* renderer);
+	void calculateAdjecencySet();
 private:
 	std::vector<std::unique_ptr<Node>> nodes;
 	std::vector<std::unique_ptr<Line>> lines;
 	int gridHeight;
+
+	int m_maxGridSize;
+	int m_up;
+	int m_right;
+	int m_bottom;
+	int m_left;
 };
 
 #endif // !_GRID_H

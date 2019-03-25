@@ -5,6 +5,7 @@ Node::Node(Vector2D position, Vector2D size, int id)
 	, m_square(std::make_unique<Square>(false))
 	, m_id(id)
 {
+	m_adjecancySet.reserve(4);
 	m_square->setPosition(m_position);
 	m_square->setSize(size);
 	m_square->setRGBA(192, 196, 192);

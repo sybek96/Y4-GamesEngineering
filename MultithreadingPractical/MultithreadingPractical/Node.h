@@ -39,6 +39,7 @@ public:
 	void draw(SDL_Renderer* renderer);
 	void setRGBA(int r, int g, int b, int a = 255);
 
+	std::vector<std::shared_ptr<Node>> m_adjecancySet;
 private:
 	Vector2D m_position;
 	int m_id;
@@ -47,6 +48,7 @@ private:
 	bool m_visited = false;
 
 	std::unique_ptr<Square> m_square;
+
 };
 
 #endif // !_NODE_H
