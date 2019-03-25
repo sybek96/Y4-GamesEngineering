@@ -20,13 +20,14 @@ public:
 #pragma endregion
 #pragma region Getters/Setters
 	std::vector<std::unique_ptr<Node>>& getNodes() { return nodes; }
-
+	const int& getGridHeight() { return gridHeight; }
 #pragma endregion
 
 	void draw(SDL_Renderer* renderer);
 private:
 	std::vector<std::unique_ptr<Node>> nodes;
 	std::vector<std::unique_ptr<Line>> lines;
+	int gridHeight;
 };
 
 #endif // !_GRID_H

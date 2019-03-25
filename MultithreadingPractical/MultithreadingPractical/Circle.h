@@ -9,10 +9,16 @@ public:
 	Circle(int r);
 	~Circle() = default;
 	void draw(SDL_Renderer* renderer) override;
+
+#pragma region Getters/Setters
+	const int& getRadius() { return m_radius; }
+
+	void setRadius(const int& radius) { m_radius = radius; }
+#pragma endregion
+
 private:
-	void drawCircle(SDL_Renderer* renderer);
 	typedef int32_t s32;
-	int radius;
+	int m_radius;
 };
 
 #endif // !_CIRCLE_H

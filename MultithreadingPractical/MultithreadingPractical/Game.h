@@ -35,7 +35,7 @@ public:
 	SDL_Texture* loadTexture(std::string path);
 	void processEvents(SDL_Event& e);
 	void displayFPS(double& timer, int& frames);
-
+	void handlePlayerMovement();
 
 	//Frees media and shuts down SDL
 	void close();
@@ -73,10 +73,6 @@ private:
 	float m_msPerFrame;
 	InputManager inputHandler;
 	bool m_exit;
-	Square* square = nullptr;
-	Point* point = nullptr;
-	Line* line = nullptr;
-	Circle* circle = nullptr;
 
 	std::unique_ptr<Grid> grid;
 	std::vector<std::shared_ptr<Enemy>> enemies;

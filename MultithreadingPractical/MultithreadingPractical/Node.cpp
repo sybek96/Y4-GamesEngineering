@@ -1,8 +1,9 @@
 ﻿#include "Node.h"
 
-Node::Node(Vector2D position, Vector2D size)
+Node::Node(Vector2D position, Vector2D size, int id)
 	: m_position(position)
 	, m_square(std::make_unique<Square>(false))
+	, m_id(id)
 {
 	m_square->setPosition(m_position);
 	m_square->setSize(size);

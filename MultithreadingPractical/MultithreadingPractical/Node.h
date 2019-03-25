@@ -7,7 +7,7 @@
 
 class Node {
 public:
-	Node(Vector2D position, Vector2D width);
+	Node(Vector2D position, Vector2D width, int id);
 	~Node() = default;
 
 
@@ -33,6 +33,7 @@ public:
 	const std::shared_ptr<Node>& getParent() { return m_parent; }
 	const bool& isBlocked() { return m_blocked; }
 	const bool& isVisited() { return m_visited; }
+	const Vector2D& getSize() { return m_square->getSize(); }
 #pragma endregion
 
 	void draw(SDL_Renderer* renderer);

@@ -20,18 +20,6 @@ Game::Game(int fps)
 		else
 		{
 			grid.reset(new Grid(10, 10));
-			//used to draw the wall
-			point = new Point(10, 10);
-			point->setRGBA(255, 255, 0);
-			square = new Square(false);
-			square->setRGBA(73, 175, 107);
-			square->setPosition(100,100);
-			square->setSize(30, 30);
-			line = new Line(Vector2D(150, 150), Vector2D(300, 400));
-			line->setRGBA(32, 78, 130);
-			circle = new Circle(25);
-			circle->setRGBA(255, 0, 0);
-			circle->setPosition(250, 250);
 
 			//setting color of a line (wall)
 			for (int i = 11; i < 17; i++)
@@ -45,8 +33,9 @@ Game::Game(int fps)
 				grid->getNodes().at(i)->setRGBA(99, 57, 5);
 				grid->getNodes().at(i)->setBlocked(true);
 			}
-			enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(5)->getPosition()));
-			player.reset(new Player(grid->getNodes().at(70)->getPosition()));
+			enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(5)->getPosition(), grid->getNodes().at(0)->getSize()));
+			player.reset(new Player(grid->getNodes().at(70)->getPosition(), 70));
+			player->setTileSize(grid->getNodes().at(0)->getSize() / 2);
 			SDL_Event e;
 			bool quit = 0;
 			double dt = 0;
@@ -124,6 +113,69 @@ void Game::displayFPS(double& timer, int& frames)
 		system("CLS");
 		std::cout << "Frames per sec: " << frames << "\n";
 		frames = 0;
+	}
+}
+
+void Game::handlePlayerMovement()
+{
+	if (inputHandler.isPressed("W"))
+	{
+		auto id = player->getNodeID();
+		if (id - 1 >= 0) //check node is within valid range
+		{
+			auto& newNode = grid->getNodes().at(id - 1);
+			if (!newNode->isBlocked() && newNode->getPosition().y < grid->getNodes().at(id)->getPosition().y) //check node not blocked and position is above current
+			{
+				player->setPosition(newNode->getPosition());
+				player->setNodeID(player->getNodeID() - 1);
+				std::cout << "CURRENT ID = " << player->getNodeID() << std::endl;
+			}
+		}
+	}
+	if (inputHandler.isPressed("S"))
+	{
+		auto& id = player->getNodeID();
+		if (id + 1 < grid->getNodes().size()) //check node is within valid range
+		{
+			auto& newNode = grid->getNodes().at(id + 1);
+			if (!newNode->isBlocked() && newNode->getPosition().y > grid->getNodes().at(id)->getPosition().y) //check node not blocked and position is below current
+			{
+				player->setPosition(newNode->getPosition());
+				player->setNodeID(player->getNodeID() + 1);
+				std::cout << "CURRENT ID = " << player->getNodeID() << std::endl;
+
+			}
+		}
+	}
+	if (inputHandler.isPressed("A"))
+	{
+		auto& id = player->getNodeID();
+		auto& gridHeight = grid->getGridHeight();
+		if (id - gridHeight >= 0) //check node is within valid range
+		{
+			auto& newNode = grid->getNodes().at(id - gridHeight);
+			if (!newNode->isBlocked())
+			{
+				player->setPosition(newNode->getPosition());
+				player->setNodeID(player->getNodeID() - gridHeight);
+				std::cout << "CURRENT ID = " << player->getNodeID() << std::endl;
+			}
+		}
+	}
+	if (inputHandler.isPressed("D"))
+	{
+		auto& id = player->getNodeID();
+		auto& gridHeight = grid->getGridHeight();
+		if (id + gridHeight < grid->getNodes().size()) //check node is within valid range
+		{
+			auto& newNode = grid->getNodes().at(id + gridHeight);
+			if (!newNode->isBlocked())
+			{
+				player->setPosition(newNode->getPosition());
+				player->setNodeID(player->getNodeID() + gridHeight);
+				std::cout << "CURRENT ID = " << player->getNodeID() << std::endl;
+			}
+		}
 	}
 }
 
@@ -225,8 +277,10 @@ void Game::update(double dt)
 	if (inputHandler.isPressed("Space"))
 	{
 		std::cout << "PRESSED SPACE" << std::endl;
-		circle->setPosition(circle->getPosition().x + 30, circle->getPosition().y);
 	}
+	handlePlayerMovement();
+
+	player->update(dt);
 }
 
 
@@ -237,10 +291,6 @@ void Game::draw()
 
 	//Render texture to screen
 	SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);
-	point->draw(gRenderer);
-	square->draw(gRenderer);
-	line->draw(gRenderer);
-	circle->draw(gRenderer);
 	grid->draw(gRenderer);
 	player->draw(gRenderer);
 	for (auto & enemy : enemies)

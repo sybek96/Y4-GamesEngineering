@@ -1,17 +1,19 @@
 ﻿#include "Grid.h"
 
 Grid::Grid(int amountWide, int amountHigh)
+	: gridHeight(amountHigh)
 {
 	int amountOfCells = amountWide * amountHigh;
 	int nodeSizeX = Screen::getWidth() / amountWide;
 	int nodeSizeY = Screen::getHeight() / amountHigh;
 
-
+	int idCounter = 0;
 	for (int i = 0; i < amountHigh * nodeSizeX; i+=nodeSizeX) //col
 	{
 		for (int j = 0; j < amountWide * nodeSizeY; j+=nodeSizeY) //row
 		{
-			nodes.push_back(std::make_unique<Node>(Vector2D(i, j), Vector2D(nodeSizeX, nodeSizeY)));
+			nodes.push_back(std::make_unique<Node>(Vector2D(i, j), Vector2D(nodeSizeX, nodeSizeY), idCounter));
+			idCounter++;
 		}
 	}
 

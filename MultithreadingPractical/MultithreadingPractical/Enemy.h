@@ -5,7 +5,7 @@
 
 class Enemy {
 public:
-	Enemy(Vector2D pos);
+	Enemy(Vector2D pos, Vector2D size);
 #pragma region Copy/move constructors
 	Enemy(Enemy const &) = default;
 	Enemy & operator=(Enemy const &) = default;
