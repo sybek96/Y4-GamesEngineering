@@ -9,6 +9,13 @@ class Node {
 public:
 	Node(Vector2D position, Vector2D width, int id);
 	~Node() = default;
+	struct GreaterThanNode
+	{
+		bool operator()(std::shared_ptr<Node> lhs, std::shared_ptr<Node> rhs)
+		{
+			return lhs->getH() < rhs->getH();
+		}
+	};
 
 
 #pragma region Copy/move constructors
@@ -27,13 +34,18 @@ public:
 	void setParent(const std::shared_ptr<Node> & parent) { m_parent = parent; }
 	void setBlocked(const bool& blocked) { m_blocked = blocked; }
 	void setVisited(const bool& visited) { m_visited = visited; }
-
+	void setG(const int& newG) { g = newG; }
+	void setH(const float& newH) { h = newH; }
+		
 	const Vector2D& getPosition() { return m_position; }
 	const int& getID() { return m_id; }
 	const std::shared_ptr<Node>& getParent() { return m_parent; }
 	const bool& isBlocked() { return m_blocked; }
 	const bool& isVisited() { return m_visited; }
 	const Vector2D& getSize() { return m_square->getSize(); }
+	const int& getF() { return g + h; }
+	const int& getG() { return g; }
+	const int& getH() { return h; }
 #pragma endregion
 
 	void draw(SDL_Renderer* renderer);
@@ -43,6 +55,10 @@ public:
 private:
 	Vector2D m_position;
 	int m_id;
+	
+	int g; //accumulated distance from starting node
+	float h = 999999.0f; //heuristic to destination
+	
 	std::shared_ptr<Node> m_parent;
 	bool m_blocked = false;
 	bool m_visited = false;

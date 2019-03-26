@@ -33,9 +33,20 @@ Game::Game(int fps)
 				grid->getNodes().at(i)->setRGBA(99, 57, 5);
 				grid->getNodes().at(i)->setBlocked(true);
 			}
-			enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(5)->getPosition(), grid->getNodes().at(0)->getSize()));
+			grid->calculateAdjecencySet();
+			int nodeToSpawnAt = 5;
+			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
+			//nodeToSpawnAt = 30;
+			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
+			nodeToSpawnAt = 40;
+			enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
+			//nodeToSpawnAt = 59;
+			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
+			//nodeToSpawnAt = 99;
+			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
 			player.reset(new Player(grid->getNodes().at(70)->getPosition(), 70));
 			player->setTileSize(grid->getNodes().at(0)->getSize() / 2);
+			pathfinding.reset(new PathFinding(grid));
 			SDL_Event e;
 			bool quit = 0;
 			double dt = 0;
@@ -274,13 +285,21 @@ void Game::close()
 void Game::update(double dt)
 {
 	inputHandler.update();
-	if (inputHandler.isPressed("Space"))
-	{
-		std::cout << "PRESSED SPACE" << std::endl;
-	}
 	handlePlayerMovement();
 
 	player->update(dt);
+	if (inputHandler.isPressed("Space"))
+	{
+		std::cout << "PRESSED SPACE" << std::endl;
+		for (auto& enemy : enemies)
+		{
+			enemy->setPath(pathfinding->findPath(grid->getNodes().at(enemy->getNodeID()), grid->getNodes().at(player->getNodeID())));
+		}
+	}
+	for (auto& enemy : enemies)
+	{
+		enemy->update(dt);
+	}
 }
 
 

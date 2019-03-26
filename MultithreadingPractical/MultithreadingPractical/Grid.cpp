@@ -12,7 +12,7 @@ Grid::Grid(int amountWide, int amountHigh)
 	{
 		for (int j = 0; j < amountWide * nodeSizeY; j+=nodeSizeY) //row
 		{
-			nodes.push_back(std::make_unique<Node>(Vector2D(i, j), Vector2D(nodeSizeX, nodeSizeY), idCounter));
+			nodes.push_back(std::make_shared<Node>(Vector2D(i, j), Vector2D(nodeSizeX, nodeSizeY), idCounter));
 			idCounter++;
 		}
 	}
@@ -36,6 +36,7 @@ Grid::Grid(int amountWide, int amountHigh)
 	{
 		nodes.at(i)->setRGBA(0, 0, 0);
 	}*/
+	calculateAdjecencySet();
 }
 
 void Grid::draw(SDL_Renderer * renderer)
@@ -50,82 +51,35 @@ void Grid::draw(SDL_Renderer * renderer)
 	}
 }
 
+/// <summary>
+/// Calculate the adjecency set.
+/// This means all neighboring nodes that are not blocked.
+/// </summary>
 void Grid::calculateAdjecencySet()
 {
-	//for (int i = 0; i < m_openList.size(); i++)
-	//{
-	//	auto currentCell = m_openList[i];
-	//	currentCell->adjecancySet.clear();
-	//	int x = currentCell->m_xCoord;
-	//	int y = currentCell->m_yCoord;
-
-
-	//	if (x < max_grid_size) //if x less than last square next one is neighbor RIGHT
-	//	{
-	//		if (!m_openList[i + right]->blocked)
-	//		{
-	//			currentCell->adjecancySet.push_back(m_openList[i + right]);
-	//		}
-	//	}
-	//	if (x > 0) // if x more than zero previous is neighbor LEFT
-	//	{
-	//		if (!m_openList[i + left]->blocked)
-	//		{
-	//			currentCell->adjecancySet.push_back(m_openList[i + left]);
-	//		}
-	//	}
-	//	if (y > 0) // if y greater than 0 TOP
-	//	{
-	//		if (!m_openList[i + up]->blocked)
-	//		{
-	//			currentCell->adjecancySet.push_back(m_openList[i + up]);
-	//		}
-	//	}
-	//	if (y < max_grid_size) // if y less tham max height BOTTOM
-	//	{
-	//		if (!m_openList[i + bottom]->blocked)
-	//		{
-	//			currentCell->adjecancySet.push_back(m_openList[i + bottom]);
-	//		}
-	//	}
-	//	if (x < max_grid_size && y > 0) // TOP RIGHT
-	//	{
-	//		if (!m_openList[i + top_right]->blocked)
-	//		{
-	//			currentCell->adjecancySet.push_back(m_openList[i + top_right]);
-	//		}
-	//	}
-	//	if (y < max_grid_size && x < max_grid_size) // BOTTOM RIGHT
-	//	{
-	//		if (!m_openList[i + bottom_right]->blocked)
-	//		{
-	//			currentCell->adjecancySet.push_back(m_openList[i + bottom_right]);
-	//		}
-	//	}
-	//	if (y < max_grid_size && x > 0) //BOTTOM LEFT
-	//	{
-	//		if (!m_openList[i + bottom_left]->blocked)
-	//		{
-	//			currentCell->adjecancySet.push_back(m_openList[i + bottom_left]);
-	//		}
-	//	}
-	//	if (y > 0 && x > 0) // TOP LEFT
-	//	{
-	//		if (!m_openList[i + top_left]->blocked)
-	//		{
-	//			currentCell->adjecancySet.push_back(m_openList[i + top_left]);
-	//		}
-	//	}
-	//}
-	for (int i = 0; i <= nodes.size(); i++)
+	for (int i = 0; i < nodes.size(); i++)
 	{
 		auto& currentCell = nodes.at(i);
 		currentCell->m_adjecancySet.clear();
-
-		if (currentCell->getID() < m_maxGridSize - gridHeight) //if can check right cell
+		auto currentID = currentCell->getID();
+		if ((currentID < m_maxGridSize - gridHeight) && (!nodes.at(currentID + gridHeight)->isBlocked())) //if can check right cell
 		{
-
+			currentCell->m_adjecancySet.push_back(nodes.at(currentID + gridHeight));
 		}
-
+		//check above cell
+		if (currentID != 0 && !nodes.at(currentID - 1)->isBlocked() && nodes.at(currentID - 1)->getPosition().y < currentCell->getPosition().y)
+		{
+			currentCell->m_adjecancySet.push_back(nodes.at(currentID - 1));
+		}
+		//check left cell
+		if (currentID - gridHeight >= 0 && !nodes.at(currentID - gridHeight)->isBlocked())
+		{
+			currentCell->m_adjecancySet.push_back(nodes.at(currentID - gridHeight));
+		}
+		//check below cell
+		if (currentID != (m_maxGridSize - 1) && !nodes.at(currentID + 1)->isBlocked() && nodes.at(currentID + 1)->getPosition().y > currentCell->getPosition().y)
+		{
+			currentCell->m_adjecancySet.push_back(nodes.at(currentID + 1));
+		}
 	}
 }

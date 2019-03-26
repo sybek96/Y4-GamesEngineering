@@ -20,6 +20,7 @@
 #include "Grid.h"
 #include "Enemy.h"
 #include "Player.h"
+#include "PathFinding.h"
 
 class Game
 {
@@ -74,9 +75,10 @@ private:
 	InputManager inputHandler;
 	bool m_exit;
 
-	std::unique_ptr<Grid> grid;
+	std::shared_ptr<Grid> grid;
 	std::vector<std::shared_ptr<Enemy>> enemies;
 	std::unique_ptr<Player> player;
+	std::unique_ptr<PathFinding> pathfinding;
 
 };
 
