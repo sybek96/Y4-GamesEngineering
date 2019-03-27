@@ -11,6 +11,16 @@ Node::Node(Vector2D position, Vector2D size, int id)
 	m_square->setRGBA(192, 196, 192);
 }
 
+//bool Node::operator<(const std::shared_ptr<Node>& other) const
+//{
+//	return h < other->h;
+//}
+//
+//bool Node::operator>(const std::shared_ptr<Node>& other) const
+//{
+//	return h > other->h;
+//}
+
 void Node::draw(SDL_Renderer * renderer)
 {
 	m_square->draw(renderer);

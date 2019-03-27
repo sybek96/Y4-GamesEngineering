@@ -11,9 +11,9 @@ public:
 	~Node() = default;
 	struct GreaterThanNode
 	{
-		bool operator()(std::shared_ptr<Node> lhs, std::shared_ptr<Node> rhs)
+		bool operator()(const std::shared_ptr<Node>& lhs, const std::shared_ptr<Node>& rhs)
 		{
-			return lhs->getH() < rhs->getH();
+			return lhs->getH() > rhs->getH();
 		}
 	};
 
@@ -26,6 +26,9 @@ public:
 	Node & operator=(Node &&) = default;
 
 #pragma endregion
+	//bool operator <(const std::shared_ptr<Node>& other) const;
+	//bool operator >(const std::shared_ptr<Node>& other) const;
+
 
 
 #pragma region Getters/Setters
@@ -45,7 +48,7 @@ public:
 	const Vector2D& getSize() { return m_square->getSize(); }
 	const int& getF() { return g + h; }
 	const int& getG() { return g; }
-	const int& getH() { return h; }
+	const float& getH() { return h; }
 #pragma endregion
 
 	void draw(SDL_Renderer* renderer);

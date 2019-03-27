@@ -27,7 +27,7 @@ public:
 	void calculateAdjecencySet();
 private:
 	std::vector<std::shared_ptr<Node>> nodes;
-	std::vector<std::unique_ptr<Line>> lines;
+	std::vector<std::shared_ptr<Line>> lines;
 	int gridHeight;
 
 	int m_maxGridSize;

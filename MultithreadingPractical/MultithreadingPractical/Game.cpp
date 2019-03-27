@@ -35,15 +35,15 @@ Game::Game(int fps)
 			}
 			grid->calculateAdjecencySet();
 			int nodeToSpawnAt = 5;
-			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
-			//nodeToSpawnAt = 30;
-			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
+			enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
+			nodeToSpawnAt = 30;
+			enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
 			nodeToSpawnAt = 40;
 			enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
-			//nodeToSpawnAt = 59;
-			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
-			//nodeToSpawnAt = 99;
-			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
+			nodeToSpawnAt = 59;
+			enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
+			nodeToSpawnAt = 99;
+			enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
 			player.reset(new Player(grid->getNodes().at(70)->getPosition(), 70));
 			player->setTileSize(grid->getNodes().at(0)->getSize() / 2);
 			pathfinding.reset(new PathFinding(grid));
