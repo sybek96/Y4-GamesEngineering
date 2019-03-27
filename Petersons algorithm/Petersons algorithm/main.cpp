@@ -25,6 +25,7 @@ void CS(int i)
 					{
 						continue;
 					}
+					//critical section
 				}
 			}
 

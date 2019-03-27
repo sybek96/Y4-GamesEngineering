@@ -47,6 +47,7 @@ Game::Game(int fps)
 			player.reset(new Player(grid->getNodes().at(70)->getPosition(), 70));
 			player->setTileSize(grid->getNodes().at(0)->getSize() / 2);
 			pathfinding.reset(new PathFinding(grid));
+			m_threadPool.reset(new ThreadPool{ 15 });
 			SDL_Event e;
 			bool quit = 0;
 			double dt = 0;
@@ -290,12 +291,20 @@ void Game::update(double dt)
 	player->update(dt);
 	if (inputHandler.isPressed("Space"))
 	{
+		std::vector<std::shared_ptr<Node>> copiedNodes = grid->getNodes();
+
 		std::cout << "PRESSED SPACE" << std::endl;
 		for (auto& enemy : enemies)
 		{
-			enemy->setPath(pathfinding->findPath(grid->getNodes().at(enemy->getNodeID()), grid->getNodes().at(player->getNodeID())));
+			//enemy->setPath(pathfinding->findPath(grid->getNodes().at(enemy->getNodeID()), grid->getNodes().at(player->getNodeID())));
+			//use a copy of the graph instead
+
+			m_threadPool->enqueue([this, enemy, copiedNodes] {
+				enemy->setPath(pathfinding->findPath(copiedNodes.at(enemy->getNodeID()), copiedNodes.at(player->getNodeID()), copiedNodes));
+			});
 		}
 	}
+
 	for (auto& enemy : enemies)
 	{
 		enemy->update(dt);

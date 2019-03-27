@@ -5,7 +5,7 @@ PathFinding::PathFinding(std::shared_ptr<Grid> grid)
 {
 }
 
-std::vector<Vector2D> PathFinding::findPath(std::shared_ptr<Node> start, std::shared_ptr<Node> finish)
+std::vector<Vector2D> PathFinding::findPath(std::shared_ptr<Node> start, std::shared_ptr<Node> finish, std::vector<std::shared_ptr<Node>> nodes)
 {
 
 	//pathToGoal.push_back(finish->getPosition());
@@ -18,7 +18,7 @@ std::vector<Vector2D> PathFinding::findPath(std::shared_ptr<Node> start, std::sh
 	std::priority_queue<std::shared_ptr<Node>, std::vector<std::shared_ptr<Node>>, decltype(lambdaComparator)> pq(lambdaComparator);
 	bool reachedGoal = false;
 
-	for (auto& node : m_grid->getNodes())
+	for (auto& node : nodes)
 	{
 		//Only do if its not an obstacle
 		if (!node->isBlocked())

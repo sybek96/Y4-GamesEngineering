@@ -139,6 +139,7 @@
     <ClCompile Include="Primitive.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Square.cpp" />
+    <ClCompile Include="ThreadPool.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Square.h" />
+    <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>

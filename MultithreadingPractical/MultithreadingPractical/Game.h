@@ -21,6 +21,7 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "PathFinding.h"
+#include "ThreadPool.h"
 
 class Game
 {
@@ -77,8 +78,9 @@ private:
 
 	std::shared_ptr<Grid> grid;
 	std::vector<std::shared_ptr<Enemy>> enemies;
-	std::unique_ptr<Player> player;
-	std::unique_ptr<PathFinding> pathfinding;
+	std::shared_ptr<Player> player;
+	std::shared_ptr<PathFinding> pathfinding;
+	std::unique_ptr<ThreadPool> m_threadPool;
 
 };
 

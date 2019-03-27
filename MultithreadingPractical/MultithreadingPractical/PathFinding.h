@@ -8,7 +8,7 @@
 class PathFinding {
 public:
 	PathFinding(std::shared_ptr<Grid> grid);
-	std::vector<Vector2D> findPath(std::shared_ptr<Node> start, std::shared_ptr<Node> finish);
+	std::vector<Vector2D> findPath(std::shared_ptr<Node> start, std::shared_ptr<Node> finish, std::vector<std::shared_ptr<Node>> nodes);
 
 private:
 	std::shared_ptr<Grid> m_grid;
