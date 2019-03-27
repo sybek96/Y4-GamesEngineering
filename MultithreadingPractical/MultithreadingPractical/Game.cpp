@@ -19,7 +19,7 @@ Game::Game(int fps)
 		}
 		else
 		{
-			grid.reset(new Grid(10, 10));
+			grid.reset(new Grid(100, 100));
 
 			//setting color of a line (wall)
 			for (int i = 11; i < 17; i++)
@@ -35,19 +35,24 @@ Game::Game(int fps)
 			}
 			grid->calculateAdjecencySet();
 			int nodeToSpawnAt = 5;
-			enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
-			nodeToSpawnAt = 30;
-			enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
-			nodeToSpawnAt = 40;
-			enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
-			nodeToSpawnAt = 59;
-			enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
-			nodeToSpawnAt = 99;
-			enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
+			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
+			//nodeToSpawnAt = 30;
+			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
+			//nodeToSpawnAt = 40;
+			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
+			//nodeToSpawnAt = 59;
+			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
+			//nodeToSpawnAt = 99;
+			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
+			for (int i = 5000; i < 5500; ++i)
+			{
+				nodeToSpawnAt = i;
+				enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
+			}
 			player.reset(new Player(grid->getNodes().at(70)->getPosition(), 70));
 			player->setTileSize(grid->getNodes().at(0)->getSize() / 2);
 			pathfinding.reset(new PathFinding(grid));
-			m_threadPool.reset(new ThreadPool{ 15 });
+			m_threadPool.reset(new ThreadPool{ 2 });
 			SDL_Event e;
 			bool quit = 0;
 			double dt = 0;
@@ -291,6 +296,8 @@ void Game::update(double dt)
 	player->update(dt);
 	if (inputHandler.isPressed("Space"))
 	{
+		//std::shared_ptr<Event> o = std::make_shared<Event>(*e);
+
 		std::vector<std::shared_ptr<Node>> copiedNodes = grid->getNodes();
 
 		std::cout << "PRESSED SPACE" << std::endl;
