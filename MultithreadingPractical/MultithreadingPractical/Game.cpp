@@ -22,19 +22,35 @@ Game::Game(int fps)
 			grid.reset(new Grid(100, 100));
 
 			//setting color of a line (wall)
-			for (int i = 11; i < 17; i++)
+			//for (int i = 11; i < 17; i++)
+			//{
+			//	grid->getNodes().at(i)->setRGBA(99, 57, 5);
+			//	grid->getNodes().at(i)->setBlocked(true);
+			//}
+
+			//for (int i = 50; i < 56; i++)
+			//{
+			//	grid->getNodes().at(i)->setRGBA(99, 57, 5);
+			//	grid->getNodes().at(i)->setBlocked(true);
+			//}
+
+			for (int i = 2000; i < 2090; ++i)
 			{
 				grid->getNodes().at(i)->setRGBA(99, 57, 5);
 				grid->getNodes().at(i)->setBlocked(true);
 			}
-
-			for (int i = 50; i < 56; i++)
+			for (int i = 5020; i < 5090; ++i)
+			{
+				grid->getNodes().at(i)->setRGBA(99, 57, 5);
+				grid->getNodes().at(i)->setBlocked(true);
+			}
+			for (int i = 7003; i < 7080; ++i)
 			{
 				grid->getNodes().at(i)->setRGBA(99, 57, 5);
 				grid->getNodes().at(i)->setBlocked(true);
 			}
 			grid->calculateAdjecencySet();
-			int nodeToSpawnAt = 5;
+			//int nodeToSpawnAt = 5;
 			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
 			//nodeToSpawnAt = 30;
 			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
@@ -44,10 +60,19 @@ Game::Game(int fps)
 			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
 			//nodeToSpawnAt = 99;
 			//enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
-			for (int i = 5000; i < 5500; ++i)
+			for (int i = 0; i < 500; ++i)
 			{
-				nodeToSpawnAt = i;
-				enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(nodeToSpawnAt)->getPosition(), grid->getNodes().at(0)->getSize(), nodeToSpawnAt));
+				auto spawnX = (std::rand() % 20) + 110;
+				auto spawnY = (std::rand() % 10) + 50;
+				auto spawnPoint = spawnX * spawnY;
+				if (!(grid->getNodes().at(spawnPoint)->isBlocked()))
+				{
+					enemies.push_back(std::make_shared<Enemy>(grid->getNodes().at(spawnPoint)->getPosition(), grid->getNodes().at(0)->getSize(), spawnPoint));
+				}
+				else
+				{
+					i--;
+				}
 			}
 			player.reset(new Player(grid->getNodes().at(70)->getPosition(), 70));
 			player->setTileSize(grid->getNodes().at(0)->getSize() / 2);
@@ -298,7 +323,7 @@ void Game::update(double dt)
 	{
 		//std::shared_ptr<Event> o = std::make_shared<Event>(*e);
 
-		std::vector<std::shared_ptr<Node>> copiedNodes = grid->getNodes();
+		std::vector<std::shared_ptr<Node>> nodes = grid->getNodes();
 
 		std::cout << "PRESSED SPACE" << std::endl;
 		for (auto& enemy : enemies)
@@ -306,8 +331,8 @@ void Game::update(double dt)
 			//enemy->setPath(pathfinding->findPath(grid->getNodes().at(enemy->getNodeID()), grid->getNodes().at(player->getNodeID())));
 			//use a copy of the graph instead
 
-			m_threadPool->enqueue([this, enemy, copiedNodes] {
-				enemy->setPath(pathfinding->findPath(copiedNodes.at(enemy->getNodeID()), copiedNodes.at(player->getNodeID()), copiedNodes));
+			m_threadPool->enqueue([this, enemy, nodes] {
+				enemy->setPath(pathfinding->findPath(nodes.at(enemy->getNodeID()), nodes.at(player->getNodeID()), nodes));
 			});
 		}
 	}
